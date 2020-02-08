@@ -68,3 +68,27 @@ Route::get('/series/{serie}',function(\App\Serie $serie){
     ]);
 });
 
+Route::get('/partials/url-video-player/{id}',function(\App\Serie $episodes){  
+    //Route::get('/series/{id}',function($serie){
+        // $serie = \App\Serie::find($id);
+        return view('partials.url-video-player')->with([
+            'episodes'=>$episodes
+        ]);
+    });
+
+Route::get('/partials/vimeo-video-player/{id}',function(\App\Serie $episodes){  
+        //Route::get('/series/{id}',function($serie){
+            // $serie = \App\Serie::find($id);
+            return view('partials.vimeo-video-player')->with([
+                'episodes'=>$episodes
+            ]);
+    });
+
+ Route::get('/partials/youtube-video-player/{id}',function(\App\Serie $episodes){  
+            //Route::get('/series/{id}',function($serie){
+                // $serie = \App\Serie::find($id);
+                return view('partials.youtube-video-player')->with([
+                    'episodes'=>$episodes
+                ]);
+    });
+

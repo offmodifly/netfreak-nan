@@ -9,7 +9,15 @@
         <a class="btn btn-info" href="{{ url('series/'.$serie->id.'/episodes/create')}}">เพิ่มตอน</a>
         <ul>
             @foreach($serie->episodes as $episodes)
-            <li><a href="#">{{ $episodes->title}}</a></li>
+                     @if($episodes->hosting == "url")
+                        <li><a href="{{ url('/partials/url-video-player/'.$episodes->id)}}">{{ $episodes->title}}</a></li>
+                    @endif
+                    @if($episodes->hosting == "youtube")
+                        <li><a href="{{ url('/partials/youtube-video-player/'.$episodes->id)}}">{{ $episodes->title}}</a></li>
+                    @endif
+                    @if($episodes->hosting == "vimeo")
+                        <li><a href="{{ url('/partials/vimeo-video-player/'.$episodes->id)}}">{{ $episodes->title}}</a></li>
+                    @endif
             @endforeach
         </ul>
     </div>
