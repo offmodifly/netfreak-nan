@@ -17,6 +17,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('/home',function(){ //เมื่อสมัคร register เสร็จ
+    return redirect('series');  // ไปหน้าหลัก
+});
+
 Route::get('/test-video', function () {
     return view('partials.vimeo-video-player');
 });
@@ -67,28 +71,36 @@ Route::get('/series/{serie}',function(\App\Serie $serie){
         'serie'=>$serie
     ]);
 });
+// แสดงวิดีโอ แต่ละตอน
+Route::get('/episodes/{episode}',function(\App\Episodes $episode){
+    $playertemplate='partials.'.$episode->hosting.'-video-player';  // กำหนด partที่จะไป
+    return view('episode.show')->with([
+        'episode'=>$episode,
+        'playertemplate'=>$playertemplate,
+    ]);
+});
 
-Route::get('/partials/url-video-player/{id}',function(\App\Serie $episodes){  
-    //Route::get('/series/{id}',function($serie){
-        // $serie = \App\Serie::find($id);
-        return view('partials.url-video-player')->with([
-            'episodes'=>$episodes
-        ]);
-    });
+// Route::get('/partials/url-video-player/{id}',function(\App\Episodes $episodes){  
+//     //Route::get('/series/{id}',function($serie){
+//         // $serie = \App\Serie::find($id);
+//         return view('partials.url-video-player')->with([
+//             'episodes'=>$episodes
+//         ]);
+//     });
 
-Route::get('/partials/vimeo-video-player/{id}',function(\App\Serie $episodes){  
-        //Route::get('/series/{id}',function($serie){
-            // $serie = \App\Serie::find($id);
-            return view('partials.vimeo-video-player')->with([
-                'episodes'=>$episodes
-            ]);
-    });
+// Route::get('/partials/vimeo-video-player/{id}',function(\App\Episodes $episodes){  
+//         //Route::get('/series/{id}',function($serie){
+//             // $serie = \App\Serie::find($id);
+//             return view('partials.vimeo-video-player')->with([
+//                 'episodes'=>$episodes
+//             ]);
+//     });
 
- Route::get('/partials/youtube-video-player/{id}',function(\App\Serie $episodes){  
-            //Route::get('/series/{id}',function($serie){
-                // $serie = \App\Serie::find($id);
-                return view('partials.youtube-video-player')->with([
-                    'episodes'=>$episodes
-                ]);
-    });
+//  Route::get('/partials/youtube-video-player/{id}',function(\App\Episodes $episodes){  
+//             //Route::get('/series/{id}',function($serie){
+//                 // $serie = \App\Serie::find($id);
+//                 return view('partials.youtube-video-player')->with([
+//                     'episodes'=>$episodes
+//                 ]);
+//     });
 
