@@ -37,7 +37,7 @@ Route::get('/series',function(){
 //แสดงฟอร์ม
 Route::get('/series/create',function(){
     return view('serie.create');
-});
+})->middleware('auth');
 
 Route::get('series/{serieId}/episodes/create',function($serieId){
     return view('episode.create')->with([
